@@ -123,13 +123,32 @@ body {
     line-height: 29px;
 }
 
+.alert-name {
+    color: red;
+    display: table-cell;
+    text-align: center;
+    left: 0;
+    width: 180px;
+    padding-left: 10px;
+    line-height: 29px;
+}
+
+#diskbuttons {
+    display: table;
+    position: absolute;
+    top: 385px;
+    left: 30px;
+}
+
 #buttons {
     display: table;
     position: absolute;
     top: 385px;
-    left: 240px;
+    left: 340px;
 }
 
+#btn-savedisk,
+#btn-loaddisk,
 #btn-cancel,
 #btn-defaults,
 #btn-save,
@@ -162,6 +181,14 @@ body {
     padding-left: 15px;
 }
 
+#alert-container {
+    position: absolute;
+    top: 315px;
+    left: 20px;
+    line-height: 29px;
+    padding-left: 15px;    
+}
+
 #binding-container {
     position: absolute;
     top: 45px;
@@ -170,5 +197,3 @@ body {
     height: 320px;
     overflow: auto;
 }
-
-

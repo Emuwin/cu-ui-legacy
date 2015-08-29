@@ -4,10 +4,12 @@
 
 module Options {
     export var activeConfigIndex = Tags.KEYBIND;
-
+    export var handleReceiveConfigVars = null;
     var $btnKeys = $('#btn-keys').addClass('active');
     var $btnInput = $('#btn-input');
     var $btnAudio = $('#btn-audio');
+    var $btnSaveDisk = $('#btn-savedisk');
+    var $btnLoadDisk = $('#btn-loaddisk');
     var $btnApply = $('#btn-apply');
     var $btnSave = $('#btn-save');
     var $btnDefaults = $('#btn-defaults');
@@ -18,6 +20,46 @@ module Options {
 
     cu.OnInitialized(() => {
         cu.GetConfigVars(activeConfigIndex);
+    });
+
+    $btnSaveDisk.click(() => {
+        var $container = $('#alert-container');
+        $container.empty();
+        cuAPI.SaveConfigChanges();
+
+        handleReceiveConfigVars = function (configs) {
+            if (configs && Options.activeConfigIndex == Tags.KEYBIND) {
+                window.localStorage.setItem('-cse-options-savedkeybinds', JSON.stringify(configs));
+
+                var $item = $('<div/>');
+                $('<div/>').addClass('alert-name').text('Bindings Saved To Disk').appendTo($item);
+                $item.appendTo($container);
+            }
+        };
+        cuAPI.GetConfigVars(activeConfigIndex);
+    });
+
+    $btnLoadDisk.click(() => {
+        var savedKeybinds = window.localStorage.getItem('-cse-options-savedkeybinds');
+        var $container = $('#alert-container');
+        $container.empty();
+
+        handleReceiveConfigVars = function (configs) {
+            if (configs && savedKeybinds && Options.activeConfigIndex == Tags.KEYBIND) {
+                savedKeybinds = $.parseJSON(savedKeybinds);
+                for (var savedItem in savedKeybinds) {
+                    if (savedKeybinds[savedItem] !== configs[savedItem]) {
+                        cu.ChangeConfigVar(savedItem, savedKeybinds[savedItem]);
+                    }
+                }
+                Options.handleReceiveConfigVars = null;
+                cuAPI.GetConfigVars(Options.activeConfigIndex);
+                var $item = $('<div/>');
+                $('<div/>').addClass('alert-name').text('Bindings Loaded From Disk').appendTo($item);
+                $item.appendTo($container);
+            }
+        };
+        cuAPI.GetConfigVars(activeConfigIndex);
     });
 
     $btnApply.click(() => {
@@ -92,6 +134,12 @@ module KeyBindings {
     cu.Listen('HandleReceiveConfigVars', configs => {
         if (configs && Options.activeConfigIndex == Tags.KEYBIND) {
             configs = $.parseJSON(configs);
+
+            // Call handle function for save/load
+            if (Options.handleReceiveConfigVars) {
+                Options.handleReceiveConfigVars(configs);
+                Options.handleReceiveConfigVars = null;
+            }
 
             $container.empty();
             for (var item in configs) {
