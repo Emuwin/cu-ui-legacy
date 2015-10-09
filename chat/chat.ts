@@ -11,17 +11,17 @@ module Chat {
 
     // INITIALIZE!
     function initialize() {
-        ChatLib.onWebSocketConnected = () => {
-            cu.JoinRoomAsCurrentUser(cu.GLOBAL_CHATROOM);
-            cu.JoinRoomAsCurrentUser(cu.COMBAT_CHATROOM);
-        }
+        //ChatLib.onWebSocketConnected = () => {
+        //    cu.JoinRoomAsCurrentUser(cu.GLOBAL_CHATROOM);
+        //    cu.JoinRoomAsCurrentUser(cu.COMBAT_CHATROOM);
+        //}
         ChatLib.initChat([cu.GLOBAL_CHATROOM_NAME, cu.COMBAT_CHATROOM_NAME], false);
         //ChatLib.connect(cuAPI.loginToken);
     }
 
-    function onAnnouncement(message, type) {
+    function onAnnouncement(message, type, priority) {
         // Only handle text announcements here.
-        if (type == Announcement.AnnouncementType.Text) {
+        if (type & Announcement.AnnouncementType.Text) {
             ChatLib.onConsoleText(message, cu.GLOBAL_CHATROOM_NAME);
         }
     }

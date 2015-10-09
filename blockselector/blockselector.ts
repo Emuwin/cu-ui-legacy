@@ -6,16 +6,13 @@ module BlockSelector {
     class BlockIcon {
         constructor(public icon: string, public buildingID: number, private cu: CU) {
             this.rootElement = $('<div/>').addClass('block-type');
-            this.rootElement.css(
-                {
-                    background: "url('../images/blockselector/" + icon + "') no-repeat top left"
-                });
+            this.rootElement.css('background-image', 'url(data:image/png;base64,' + icon + ')');
             this.rootElement.click(() => {
                 cu.ChangeBlockType(buildingID);
-				$('.block-selected').each(function(){
-					$(this).removeClass('block-selected');
-				});
-				$(this).addClass('block-selected');				
+                $('.block-selected').each(function(){
+                    $(this).removeClass('block-selected');
+                });
+                $(this).addClass('block-selected');				
             });
             this.rootElement.appendTo($blockContainer);
 

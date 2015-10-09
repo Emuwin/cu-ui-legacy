@@ -5,9 +5,9 @@
 /// <reference path="../vendor/promise.d.ts" />
 
 class TagConstraint {
-    constructor(public constraintType: TagConstraintType, public tags: Array<AbilityTags>) {}
+    constructor(public constraintType: TagConstraintType, public tags: Array<AbilityTag>) {}
 
-    public checkConstraints(otherTags: Array<AbilityTags>) {
+    public checkConstraints(otherTags: Array<AbilityTag>) {
         if (this.constraintType === TagConstraintType.AllOf &&
             this.tags.filter(tag => { return otherTags.indexOf(tag) === -1; }).length > 0) return false;
 
@@ -29,7 +29,7 @@ class Component {
     subType: ComponentSubType;
     path: ComponentPath;
     stats: Array<any>;
-    tags: Array<AbilityTags>;
+    tags: Array<AbilityTag>;
     tagConstraints: Array<TagConstraint>;
     slot: ComponentSlot;
     rank: number;
@@ -176,7 +176,7 @@ class Component {
             this.tagConstraints.forEach(tagConstraint => {
                 var constraintType = TagConstraintType[tagConstraint.constraintType].replace(/([A-Z])/g, ' $1').trim();
 
-                var tags = tagConstraint.tags.map(tag => AbilityTags[tag].replace(/([A-Z])/g, ' $1').trim());
+                var tags = tagConstraint.tags.map(tag => AbilityTag[tag].replace(/([A-Z])/g, ' $1').trim());
 
                 $('<li>').text(constraintType + ': ' + tags.join(', ')).appendTo($requirements);
             });
@@ -219,7 +219,7 @@ class Component {
         });
     }
 
-    public tagCheck(tags: Array<AbilityTags>) {
+    public tagCheck(tags: Array<AbilityTag>) {
         for (var i = 0, length = this.tagConstraints.length; i < length; i++) {
             if (!this.tagConstraints[i].checkConstraints(tags)) return false;
         }

@@ -13,6 +13,8 @@ class EnemyTarget extends Target {
                 cuAPI.OnEnemyTargetStaminaChanged(this.updateStamina.bind(this));
 
                 cuAPI.OnEnemyTargetEffectsChanged(this.updateEffects.bind(this));
+
+                cuAPI.OnEnemyTargetInjuriesChanged(this.updateInjuries.bind(this));
             });
         }
     }

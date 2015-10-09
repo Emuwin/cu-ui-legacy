@@ -4,7 +4,7 @@
 
 module GameMenu {
     $('#btn-options').click(() => {
-        cuAPI.OpenUI('options.ui');
+        cuAPI.OpenUI('options');
         cuAPI.CloseUI('gamemenu');
     });
 

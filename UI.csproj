@@ -19,6 +19,21 @@
   <ItemGroup>
     <Content Include="ability-builder\builder.css" />
     <Content Include="ability-builder\builder.html" />
+    <Content Include="images\components\pri-lightaxe-reg.png" />
+    <Content Include="images\login\char-humanmalea-select.jpg" />
+    <Content Include="images\login\char-humanmalea.jpg" />
+    <Content Include="images\login\char-humanmalet-select.jpg" />
+    <Content Include="images\login\char-humanmalet.jpg" />
+    <Content Include="images\login\char-humanmalev-select.jpg" />
+    <Content Include="images\login\char-humanmalev.jpg" />
+    <Content Include="images\minimap\alpha-map_02.jpg" />
+    <Content Include="images\races\humanmalet.jpg" />
+    <Content Include="images\races\humanmalet-stand.png" />
+    <Content Include="images\races\humanmalev.jpg" />
+    <Content Include="images\races\humanmalev-stand.png" />
+    <Content Include="images\races\portraits\humanmalea.jpg" />
+    <Content Include="images\races\portraits\humanmalet.jpg" />
+    <Content Include="images\races\portraits\humanmalev.jpg" />
     <Content Include="injuries\injuries.css" />
     <Content Include="injuries\injuries.html" />
     <TypeScriptCompile Include="ability-builder\builder.ts" />
@@ -370,8 +385,8 @@
     <Content Include="images\races\hamadryad.jpg" />
     <Content Include="images\races\helbound-stand.png" />
     <Content Include="images\races\helbound.jpg" />
-    <Content Include="images\races\human-stand.png" />
-    <Content Include="images\races\human.jpg" />
+    <Content Include="images\races\humanmalea-stand.png" />
+    <Content Include="images\races\humanmalea.jpg" />
     <Content Include="images\races\luchorpan-stand.png" />
     <Content Include="images\races\luchorpan.jpg" />
     <Content Include="images\races\portraits\caitsith.jpg" />

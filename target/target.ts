@@ -14,6 +14,11 @@ class Target {
     staminaBarWidth = this.$staminaBar.width();
     $staminaText = cu.FindElement('#stamina-text');
     $effects = cu.FindElement('#effects');
+    $injuryLocation = cu.FindElement('#injury-location');
+    $injuryBar = cu.FindElement('#injury-bar');
+    injuryBarWidth = this.$injuryBar.width();
+    $injuryText = cu.FindElement('#injury-text');
+    $injuryCount = cu.FindElement('#injury-count');
 
     constructor() {
         this.bindChangedCallbacks();
@@ -61,4 +66,20 @@ class Target {
             img.appendTo(this.$effects);
         }
     }
+
+    updateInjuries(part: number, health: number, maxHealth: number, numWounds: number) {
+    if (maxHealth > 0) {
+        this.$injuryLocation.text("Torso");
+        var healthRatio = health / maxHealth;
+        this.$injuryBar.width(healthRatio * this.injuryBarWidth);
+        this.$injuryText.text(health + ' / ' + maxHealth);
+        this.$injuryCount.text(numWounds);
+    } else {
+        this.$injuryLocation.text('');
+        this.$injuryBar.width(0);
+        this.$injuryText.text('');
+        this.$injuryCount.text('');
+    }
+}
+
 }

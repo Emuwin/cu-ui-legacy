@@ -703,14 +703,14 @@ module AbilityBuilder {
     }
 
     function mapTags(tags) {
-        return tags.map(tag => AbilityTags[tag]);
+        return tags.map(tag => AbilityTag[tag]);
     }
 
     function mapTagConstraints(tagConstraints) {
         return tagConstraints.map(tagConstraint => {
             var ct: string = tagConstraint.constraintType.toString();
             var constraintType = TagConstraintType[ct];
-            var tags = tagConstraint.tags.map(tag => AbilityTags[tag]);
+            var tags = tagConstraint.tags.map(tag => AbilityTag[tag]);
             return new TagConstraint(constraintType, tags);
         });
     }

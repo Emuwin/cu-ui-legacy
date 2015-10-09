@@ -85,7 +85,7 @@ var SoundEvents =
         STOP_UI_MENU_PREVIEWREALM: 997902358,
 }
 
-enum AbilityTags {
+enum AbilityTag {
     SYSTEM = 0,      // Used for abilities applied outside the ability system. e.g. No movement stat mod while casting.
     NonAggressive,   // Used for effects that should affect caster and/or allies.
     NonInteractable, // Can't interact or be interacted with
@@ -152,6 +152,10 @@ enum AbilityTags {
     Blocking,
     CounterAttack,
     Unblockable,
+
+    // Other
+    Trauma,
+    Wound,
 
     // Bens test tags
     TestTagA,
@@ -2177,7 +2181,7 @@ interface CUInGameAPI {
 
     /* Announcement */
 
-    OnAnnouncement(c: (message: string, type: number) => void): void;
+    OnAnnouncement(c: (message: string, type: number, priority: number) => void): void;
 
     /* Character */
 
@@ -2199,6 +2203,7 @@ interface CUInGameAPI {
     OnEnemyTargetNameChanged(callback: (name: string) => void): void;
     OnEnemyTargetHealthChanged(callback: (health: number, maxHealth: number) => void): void;
     OnEnemyTargetStaminaChanged(callback: (stamina: number, maxStamina: number) => void): void;
+    OnEnemyTargetInjuriesChanged(c: (part: number, health: number, maxHealth: number, numWounds: number) => void): void;
     OnEnemyTargetEffectsChanged(callback: (effects: string) => void): void;
 
     /* Friendly Target */
@@ -2206,6 +2211,7 @@ interface CUInGameAPI {
     OnFriendlyTargetNameChanged(callback: (name: string) => void): void;
     OnFriendlyTargetHealthChanged(callback: (health: number, maxHealth: number) => void): void;
     OnFriendlyTargetStaminaChanged(callback: (stamina: number, maxStamina: number) => void): void;
+    OnFriendlyTargetInjuriesChanged(c: (part: number, health: number, maxHealth: number, numWounds: number) => void): void;
     OnFriendlyTargetEffectsChanged(callback: (effects: string) => void): void;
 
     /* Chat */
@@ -2282,7 +2288,6 @@ interface CUInGameAPI {
     horizontalSpeed: number;
     velFacing: number;
     downCollisionAngle: number;
-    terrainCollisionAngle: number;
 
     /* Console */
 

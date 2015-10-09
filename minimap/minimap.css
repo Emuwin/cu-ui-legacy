@@ -14,7 +14,7 @@ html, body {
     left: 5px;
     width: 256px;
     height: 256px;
-    background-image: url('../images/minimap/alpha-map_02.png');
+    background-image: url('../images/minimap/alpha-map_02.jpg');
     background-size: cover;
     opacity: 0.75;
 }

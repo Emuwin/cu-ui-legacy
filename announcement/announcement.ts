@@ -9,9 +9,15 @@
 
 module Announcement {
     export enum AnnouncementType {
-        Text = 0,       // In the chat window.
-        Notice = 1,     // At the top.
-        Vital = 2       // In the middle.
+        Text = 1,       // In the chat window.
+        PopUp = 2,
+        ALL = Text | PopUp
+    }
+
+    export enum AnnouncementPriority {
+        Info = 0,
+        Notice = 1,
+        Vital = 2
     }
 
     var $announcement = cu.FindElement('#announcement');
@@ -21,9 +27,9 @@ module Announcement {
 
     $announcement.click(hide);
 
-    function onAnnouncement(message, type) {
+    function onAnnouncement(message, type, priority) {
         // Text should be handled by chat.
-        if (type != AnnouncementType.Text) {
+        if (type & AnnouncementType.PopUp) {
             show(message);
         }
     }

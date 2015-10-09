@@ -6,6 +6,7 @@
 
 module Respawn {
     var $respawn = cu.FindElement('#respawn');
+    var $homeBtn = cu.FindElement('#homeButton');
 
     // Functions
     function updateHealth(health) {
@@ -81,5 +82,6 @@ module Respawn {
         MiniMap.iconScale = 1.0;
         cu.OnInitialized(initialize);
     }
-    $(".window").draggable();
+    //$(".window").draggable();
+    $homeBtn.on('click', () => { cuAPI.Respawn(-1); });
 }

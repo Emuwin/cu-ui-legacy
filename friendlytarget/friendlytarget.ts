@@ -13,6 +13,8 @@ class FriendlyTarget extends Target {
                 cuAPI.OnFriendlyTargetStaminaChanged(this.updateStamina.bind(this));
 
                 cuAPI.OnFriendlyTargetEffectsChanged(this.updateEffects.bind(this));
+
+                cuAPI.OnFriendlyTargetInjuriesChanged(this.updateInjuries.bind(this));
             });
         }
     }

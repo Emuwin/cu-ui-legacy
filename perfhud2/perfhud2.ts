@@ -24,9 +24,9 @@ module PerfHUD2 {
             $physHud.empty();
             addToTab('position:       (' + (cuAPI.locationX || 0.0).toFixed(1) + ', ' + (cuAPI.locationY || 0.0).toFixed(1) + ', ' + (cuAPI.locationZ || 0.0).toFixed(1) + ')', $physHud);
             addToTab('serverPosition: (' + (cuAPI.serverLocationX || 0.0).toFixed(1) + ', ' + (cuAPI.serverLocationY || 0.0).toFixed(1) + ', ' + (cuAPI.serverLocationZ || 0.0).toFixed(1) + ')', $physHud);
+            addToTab('facing:         ' + (cuAPI.facing || 0.0).toFixed(1) + '°', $physHud);
             addToTab('horizontalVel:  ' + (cuAPI.horizontalSpeed || 0.0).toFixed(1) + ' m/s @ ' + (cuAPI.velFacing || 0).toFixed(0) + '°', $physHud);
             addToTab('downAngle:      ' + (cuAPI.downCollisionAngle || 0.0).toFixed(1) + '°', $physHud);
-            addToTab('terrainAngle:   ' + (cuAPI.terrainCollisionAngle || 0.0).toFixed(1) + '°', $physHud);
 
             $netHud.empty();
             addToTab('latency (msec):      ' + (cuAPI.netstats_lag || 0.000).toFixed(1), $netHud, ProblemIf(cuAPI.netstats_lag > 250));

@@ -146,11 +146,25 @@ module BuildBlueprints {
             }
         });
         var $newBlueprint = $("<div class='blueprint'>");
-        $newBlueprint.text(name);
-        $newBlueprint.click(() => {
-            cu.SelectBlueprint(index);
+        $.ajax({
+            type: 'GET',
+            url: 'cuapi://buildingicons/blueprint/' + index,
+            contentType: 'application/json; charset=utf-8',
+            timeout: 10000
+        }).done((data) => {
+            $newBlueprint.css('background-image', 'url(data:image/png;base64,' + data + ')');
+            $newBlueprint.text(name);
+            $newBlueprint.click(() => {
+                cu.SelectBlueprint(index);
+            });
+            $("#blueprint-container").prepend($newBlueprint);
+        }).fail((jqXHR, textStatus, errorThrown) => {
+            $newBlueprint.text(name);
+            $newBlueprint.click(() => {
+                cu.SelectBlueprint(index);
+            });
+            $("#blueprint-container").prepend($newBlueprint);
         });
-        $("#blueprint-container").prepend($newBlueprint);
     });
 
     cu.Listen('HandleCopyBlueprint', () => {
@@ -158,7 +172,7 @@ module BuildBlueprints {
     });
 
     cu.Listen('HandleDownloadBlueprints',(charid) => {
-        serverAddress = cu.SecureApiUrl('api/blueprint');
+        serverAddress = cu.SecureApiUrl('api/blueprint'); //'cuapi://buildingicons/blueprint';
         charID = charid;
         token = cuAPI.loginToken;
         $.ajax({
